@@ -1,0 +1,17 @@
+Task name,Start date,End date,Duration (days),Nickname,Task type (defines color)
+Cut board and trim,1/1/2018,,1,cbt,Workshop
+Glue board and trim,cbt:1.0,,1,gbt,Workshop
+Drill Holes in Board,gbt:1.0,,1,dhb,Workshop
+Attach adjustable feet,dhb:1.0,,1,af,Workshop
+3D printing,1/2/2018,,1,print,Mechanics
+Attach LED holder,print:1.0,,1,LED_H,Mechanics
+Convert Power Supply,af:1.0,,1,cps,Electronics
+Spray Paint,1/2/2018,,1,sp,Mechanics
+Solder,cps:1.0,,1,s,Electronics
+Peltiers,s:1.0,,1,p,Electronics
+Attach Petri Dish,sp:1.0,,1,apd,Mechanics
+Attach Holders,apd:1.0,,1,ah,Mechanics
+Mount,ah:1.0,,1,m,Workshop
+Attach printed signs,ah:1.0,,1,aes,Aesthetics
+Flex Tubing,ah:1.0,,1,ft,Aesthetics
+Chamois,1/3/2018,,1,ch,Mechanics
