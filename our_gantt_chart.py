@@ -62,9 +62,9 @@ def gantt_chart(activities, colors):
     datemin = dt.datetime(3000,1,1)
     datemax = dt.datetime(1,1,1)
 
-###########################################################
-# Validate 
-###########################################################
+    ###########################################################
+    # Validate 
+    ###########################################################
     for i,key in enumerate(activities.keys()):
         activity = activities[key]
         akeys = activity.keys()
@@ -86,15 +86,23 @@ def gantt_chart(activities, colors):
         
         activity = activities[key]
         start = is_date(activity["start"])
+        print(key,activity["start"],start)
         if start==False:
             idx = activity["start"]
-            start = is_date(activities[idx]["start"]) + dt.timedelta(days = activities[idx]["duration"])
+            #start = is_date(activities[idx]["start"]) + dt.timedelta(days = activities[idx]["duration"])
+            start = activities[idx]["start"] + dt.timedelta(days = activities[idx]["duration"])
+            #activities[key]['start'] = start
         #print(type(start))
+        #else:
+        print(start)
+        activities[key]['start'] = start # Save it as a datetime object
+
         duration = activity["duration"]
         end = start + dt.timedelta(days=duration)
 
 
-        if start:
+        if 1:
+            print("end: ",end,datemax)
             if start<datemin:
                 datemin = start
             if end>datemax:
@@ -113,13 +121,13 @@ def gantt_chart(activities, colors):
     ax.xaxis.set_major_formatter(xfmt)
 
 
-    datemin -= dt.timedelta(days=2)
-    datemax += dt.timedelta(days=2)
+    datemin -= dt.timedelta(days=60)
+    datemax += dt.timedelta(days=60)
 
     timespan = (datemax-datemin).days
-    #print("timespan: ",timespan)
+    print("timespan: ",timespan)
 
-    label_start = datemin - dt.timedelta(days = 0.2*timespan)
+    label_start = datemin - dt.timedelta(days = 0.3*timespan)
 
 
 
@@ -128,8 +136,8 @@ def gantt_chart(activities, colors):
 # Generate month grids by hand
     yearmin = datemin.year
     monthmin = datemin.month
-    yearmax = datemin.year
-    monthmax = datemin.month
+    yearmax = datemax.year
+    monthmax = datemax.month
 
 
 
@@ -141,11 +149,14 @@ def gantt_chart(activities, colors):
 
     year = yearmin
 
+    nticks = nmonths/4
+
     while year<=yearmax+1:
         month = 1
         while month<=12:
             x = dt.datetime(year,month,1)
-            xticks.append(x)
+            if month%4==1:        
+                xticks.append(x)
             #rint(x,y0,y1)
             plt.plot([x,x],[y0,y1],'k--',alpha=0.2)
             month += 1
@@ -193,8 +204,8 @@ def gantt_chart(activities, colors):
     ax.legend(dummies, labels,loc='upper right',fontsize=18)
 #######################
 
-#print(datemin)
-#print(datemax)
+    print(datemin)
+    print(datemax)
         
     ax.set_xlim(label_start, datemax)
     ax.set_ylim(-len(activities),1)
