@@ -52,7 +52,7 @@ def is_number(s):
 
 
 
-def gantt_chart(activities, colors):
+def gantt_chart(activities, colors, verbose=False):
     fig1 = plt.gcf()# plt.figure(figsize=(12,8))
     #ax = fig1.add_subplot(111, aspect='equal')
     ax = fig1.add_subplot(1,1,1)
@@ -86,7 +86,8 @@ def gantt_chart(activities, colors):
         
         activity = activities[key]
         start = is_date(activity["start"])
-        print(key,activity["start"],start)
+        if verbose:
+            print(key,activity["start"],start)
         if start==False:
             idx = activity["start"]
             #start = is_date(activities[idx]["start"]) + dt.timedelta(days = activities[idx]["duration"])
@@ -94,7 +95,8 @@ def gantt_chart(activities, colors):
             #activities[key]['start'] = start
         #print(type(start))
         #else:
-        print(start)
+        if verbose:
+            print(start)
         activities[key]['start'] = start # Save it as a datetime object
 
         duration = activity["duration"]
@@ -102,7 +104,8 @@ def gantt_chart(activities, colors):
 
 
         if 1:
-            print("end: ",end,datemax)
+            if verbose:
+                print("end: ",end,datemax)
             if start<datemin:
                 datemin = start
             if end>datemax:
@@ -125,7 +128,8 @@ def gantt_chart(activities, colors):
     datemax += dt.timedelta(days=60)
 
     timespan = (datemax-datemin).days
-    print("timespan: ",timespan)
+    if verbose:
+        print("timespan: ",timespan)
 
     label_start = datemin - dt.timedelta(days = 0.3*timespan)
 
@@ -204,8 +208,9 @@ def gantt_chart(activities, colors):
     ax.legend(dummies, labels,loc='upper right',fontsize=18)
 #######################
 
-    print(datemin)
-    print(datemax)
+    if verbose:
+        print(datemin)
+        print(datemax)
         
     ax.set_xlim(label_start, datemax)
     ax.set_ylim(-len(activities),1)
