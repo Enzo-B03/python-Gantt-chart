@@ -129,6 +129,8 @@ def gantt_chart(activities, colors, verbose=False):
     xfmt = mdates.DateFormatter('%m-%d-%Y')
     ax.xaxis.set_major_formatter(xfmt)
 
+    plt.xticks(fontsize=14)#, rotation=90)
+
 
     datemin -= dt.timedelta(days=60)
     datemax += dt.timedelta(days=60)
