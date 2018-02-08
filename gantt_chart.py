@@ -86,10 +86,10 @@ def gantt_chart(activities, colors, verbose=False):
         
         activity = activities[key]
         start = is_date(activity["start"])
-        print("activity")
-        print(activity)
-        print("start: ",start)
         if verbose:
+            print("activity")
+            print(activity)
+            print("start: ",start)
             print(key,activity["start"],start)
         if start==False:
             idx = activity["start"]
