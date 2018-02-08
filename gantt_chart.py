@@ -86,11 +86,17 @@ def gantt_chart(activities, colors, verbose=False):
         
         activity = activities[key]
         start = is_date(activity["start"])
+        print("activity")
+        print(activity)
+        print("start: ",start)
         if verbose:
             print(key,activity["start"],start)
         if start==False:
             idx = activity["start"]
             #start = is_date(activities[idx]["start"]) + dt.timedelta(days = activities[idx]["duration"])
+            if verbose:
+                print("here")
+                print(activities[idx]["start"], activities[idx]["duration"])
             start = activities[idx]["start"] + dt.timedelta(days = activities[idx]["duration"])
             #activities[key]['start'] = start
         #print(type(start))
